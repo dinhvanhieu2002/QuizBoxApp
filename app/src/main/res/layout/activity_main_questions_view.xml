@@ -31,21 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="50dp"
             tools:ignore="UselessParent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#11228B">
-
-                <Button
-                    android:id="@+id/action_menu_presenter"
-                    android:layout_width="30dp"
-                    android:layout_height="18dp"
-                    android:layout_marginStart="20dp"
-                    android:background="@drawable/ic_menu_icon" />
-
-            </androidx.appcompat.widget.Toolbar>
 
             <RelativeLayout
                 android:layout_width="match_parent"

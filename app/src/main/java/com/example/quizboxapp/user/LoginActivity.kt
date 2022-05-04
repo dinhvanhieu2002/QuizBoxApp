@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.preference.Preference
+import androidx.preference.PreferenceManager
 import com.example.quizboxapp.MainActivity
 import com.example.quizboxapp.R
 import com.google.android.material.textfield.TextInputLayout
@@ -30,22 +32,7 @@ class LoginActivity : AppCompatActivity() {
         val goBtn = findViewById<Button>(R.id.go_btn)
 
         firebaseAuth = Firebase.auth
-
-
-//        binding.signupTv.setOnClickListener {
-//            val signUpActivity = Intent(applicationContext, SignUpActivity::class.java)
-//            startActivity(signUpActivity)
-//        }
-
-
-//        if (firebaseAuth.currentUser != null && firebaseAuth.currentUser!!.isEmailVerified) {
-//            val loginActivity = Intent(
-//                applicationContext,
-//                MainActivity::class.java
-//            )
-//            startActivity(loginActivity)
-//        }
-
+        
         goBtn.setOnClickListener {
             login()
         }
@@ -78,19 +65,29 @@ class LoginActivity : AppCompatActivity() {
                     reference.child(uid).setValue(hashMap)
                 }
                 if (firebaseAuth.currentUser!!.isEmailVerified) {
-//                    binding.Logloading.visibility = View.VISIBLE
                     Toast.makeText(
                         this,
                         "I wish you LUCK!",
                         Toast.LENGTH_LONG
                     ).show()
+
+                    //luu session
+                    val user = firebaseAuth.currentUser
+                    val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                    val editor = preferences.edit()
+
+                    if (user != null) {
+                        editor.putString("Email", user.email)
+                        editor.putString("Id", user.uid)
+                        editor.apply()
+                    }
+
                     val mainIntent =
                         Intent(this, MainActivity::class.java)
                     startActivity(mainIntent)
                 } else if (!firebaseAuth.currentUser!!.isEmailVerified) {
-//                    binding.Logloading.visibility = View.INVISIBLE
                     Toast.makeText(
-                        this@LoginActivity,
+                        this,
                         "Error: Email is not Verified!",
                         Toast.LENGTH_LONG
                     ).show()

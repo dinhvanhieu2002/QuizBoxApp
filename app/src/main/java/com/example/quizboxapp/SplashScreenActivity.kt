@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import com.airbnb.lottie.LottieAnimationView
 import com.example.quizboxapp.user.LoginActivity
 
@@ -14,6 +15,14 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val emailCheck = preferences.getString("Email", "Not Email Exist")
+
+        if(emailCheck!== "") {
+            val mainIntent = Intent(this, MainActivity::class.java)
+            startActivity(mainIntent)
+        }
 
         //Animations
         val startAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_bottom)

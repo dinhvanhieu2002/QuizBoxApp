@@ -16,9 +16,10 @@ class ScoreActivity : AppCompatActivity() {
         score = findViewById(R.id.score)
         nextBtn = findViewById(R.id.nl_btn)
 
-        //custom lời chúc và nhận xét
+        //custom lời chúc, nhận xét, nhạc
 
-        score.text = intent.getStringExtra("Score")
+        score.text = intent.getStringExtra("CorrectNum")
+
 
         nextBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

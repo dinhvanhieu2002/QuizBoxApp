@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -40,6 +41,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_questions_view)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         question = findViewById(R.id.question_view)
         qCount = findViewById(R.id.no_of_questions_view)
@@ -133,7 +136,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
             startTimer()
         } else {
             val intent = Intent(this, ScoreActivity::class.java)
-            intent.putExtra("Score", "$score / ${questionList.size}")
+            intent.putExtra("CorrectNum", "$score / ${questionList.size}")
+            intent.putExtra("Score", score)
             startActivity(intent)
         }
     }
@@ -195,16 +199,22 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
     private fun checkAnswer(selectedOption : Int, view : View) {
         if(selectedOption == questionList[quesNum].correctAns) {
             view.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+            val mp = MediaPlayer.create(this, R.raw.ding)
             score++
+
+            mp.start()
         } else {
             view.backgroundTintList = ColorStateList.valueOf(Color.RED)
 
             when(questionList[quesNum].correctAns) {
                 1 -> option1.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
-                2 -> option1.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
-                3 -> option1.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
-                4 -> option1.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+                2 -> option2.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+                3 -> option3.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+                4 -> option4.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
             }
+            val mp = MediaPlayer.create(this, R.raw.wrong_buzzer)
+
+            mp.start()
         }
 
 //        Timer().schedule(2000) {
@@ -215,7 +225,11 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-
         countDown.cancel()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

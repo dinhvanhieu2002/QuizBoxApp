@@ -12,8 +12,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.SimpleDrawerListener
+import androidx.preference.PreferenceManager
 import com.example.quizboxapp.user.LoginActivity
 import com.example.quizboxapp.R
+import com.example.quizboxapp.user.UserProfileActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
@@ -118,37 +120,24 @@ class MainActivity : AppCompatActivity(),
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.user_profile -> {
-//                val intent = Intent(applicationContext, UserProfileActivity::class.java)
-//                startActivity(intent)
-//                super@MainActivity.onBackPressed()
+                val intent = Intent(applicationContext, UserProfileActivity::class.java)
+                startActivity(intent)
+                super@MainActivity.onBackPressed()
                 Log.d("TAG", "Profile clicked")
             }
-            R.id.rate -> {
-                Log.d("TAG", "Rate clicked")
 
-//                try {
-//                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=")))
-//                } catch (e: ActivityNotFoundException) {
-//                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thedonuttech.tk")))
-//                }
-            }
-            R.id.about -> {
-                Log.d("TAG", "About clicked")
-//                val about = Intent(applicationContext, AboutUsActivity::class.java)
-//                startActivity(about)
-            }
             R.id.logout -> {
-                //Logout
+                val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+                val editor = preferences.edit()
+                editor.putString("Email", "")
+                editor.apply()
+
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
                 finish()
             }
         }
         return true
-    }
-
-    companion object {
-
     }
 
 }

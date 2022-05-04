@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context="com.example.quizboxapp.SetsActivity"
     android:background="@color/colorPrimary">
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
@@ -33,20 +34,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#11228B">
-                <Button
-                    android:id="@+id/action_menu_presenter"
-                    android:layout_width="30dp"
-                    android:layout_height="18dp"
-                    android:layout_marginStart="20dp"
-                    android:background="@drawable/ic_menu_icon"
-                    android:gravity="start" />
-
-            </androidx.appcompat.widget.Toolbar>
 
             <TextView
                 android:layout_width="wrap_content"
