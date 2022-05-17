@@ -17,31 +17,24 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val emailCheck = preferences.getString("Email", "Not Email Exist")
+        val emailCheck = preferences.getString("Email", "")
 
         if(emailCheck!== "") {
             val mainIntent = Intent(this, MainActivity::class.java)
             startActivity(mainIntent)
         }
 
-        //Animations
         val startAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_bottom)
         val splashTextAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_slide_in_left)
         val splashText1Animation = AnimationUtils.loadAnimation(this, R.anim.anim_slide_in_right)
         val logoAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_top)
 
-        //Hooks
-
-        //Hooks
         val startBtn = findViewById<Button>(R.id.start_btn)
         val txtSplashText = findViewById<TextView>(R.id.sp_tv)
         val txtSplashText1 = findViewById<TextView>(R.id.sp_tv1)
         val logoImageView = findViewById<ImageView>(R.id.sp_logo)
         val lottieAnimationView = findViewById<LottieAnimationView>(R.id.Logloading)
 
-        //Start Animation
-
-        //Start Animation
         startBtn.animation = startAnimation
         logoImageView.animation = logoAnimation
         txtSplashText1.animation = splashText1Animation

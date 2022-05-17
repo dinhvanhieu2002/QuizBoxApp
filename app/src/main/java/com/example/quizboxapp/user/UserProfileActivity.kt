@@ -40,39 +40,47 @@ class UserProfileActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         val firebaseDatabase = FirebaseDatabase.getInstance()
         val databaseReference = firebaseDatabase.reference
+
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val uid = preferences.getString("Id", "Not Id Exist")
 
         if (uid != null) {
             databaseReference.child(uid).get().addOnCompleteListener {
-                Log.i("firebase", "Got value ${it.result}")
+                val fullname = "" + it.result.child("fullName").value
+                val username = "" + it.result.child("userName").value
+                val password = "" + it.result.child("password").value
+                val email = "" + it.result.child("email").value
+
+                //set data
+                textInputLayoutFullName.editText!!.setText(fullname)
+                textInputLayoutUserName.editText!!.setText(username)
+                textInputLayoutPassword.editText!!.setText(password)
+                textInputLayoutEmail.editText!!.setText(email)
             }.addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
         }
 
-
-
-        assert(user != null)
-        val query = databaseReference.orderByChild("email").equalTo(user!!.email)
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (ds in dataSnapshot.children) {
-                    val fullname = "" + ds.child("fullName").value
-                    val username = "" + ds.child("userName").value
-                    val password = "" + ds.child("password").value
-                    val email = "" + ds.child("email").value
-
-                    //set data
-                    textInputLayoutFullName.editText!!.setText(fullname)
-                    textInputLayoutUserName.editText!!.setText(username)
-                    textInputLayoutPassword.editText!!.setText(password)
-                    textInputLayoutEmail.editText!!.setText(email)
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {}
-        })
+//        assert(user != null)
+//        val query = databaseReference.orderByChild("uid").equalTo(user!!.uid)
+//        query.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                for (ds in dataSnapshot.children) {
+//                    val fullname = "" + ds.child("fullName").value
+//                    val username = "" + ds.child("userName").value
+//                    val password = "" + ds.child("password").value
+//                    val email = "" + ds.child("email").value
+//
+//                    //set data
+//                    textInputLayoutFullName.editText!!.setText(fullname)
+//                    textInputLayoutUserName.editText!!.setText(username)
+//                    textInputLayoutPassword.editText!!.setText(password)
+//                    textInputLayoutEmail.editText!!.setText(email)
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {}
+//        })
 
 
         backBtn.setOnClickListener {

@@ -27,6 +27,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val emailCheck = preferences.getString("Email", "")
+
+        if(emailCheck!== "") {
+            val mainIntent = Intent(this, MainActivity::class.java)
+            startActivity(mainIntent)
+        }
+
         emailInputLayout = findViewById(R.id.email)
         passwordInputLayout = findViewById(R.id.password)
         val goBtn = findViewById<Button>(R.id.go_btn)

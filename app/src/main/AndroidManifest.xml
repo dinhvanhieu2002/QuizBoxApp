@@ -14,7 +14,8 @@
         android:theme="@style/QuizBoxApp">
         <activity
             android:name=".user.UserProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/QuizBoxApp.NoActionBar"/>
         <activity
             android:name=".ScoreActivity"
             android:exported="false"
@@ -27,12 +28,10 @@
             android:exported="true" />
         <activity
             android:name=".user.SignUpActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/QuizBoxApp.NoActionBar"/>
         <activity
             android:name=".user.LoginActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SplashScreenActivity"
             android:exported="true"
             android:theme="@style/QuizBoxApp.NoActionBar">
             <intent-filter>
@@ -41,6 +40,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/QuizBoxApp.NoActionBar"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
