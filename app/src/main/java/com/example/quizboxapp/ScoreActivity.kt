@@ -1,5 +1,6 @@
 package com.example.quizboxapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,18 +16,32 @@ class ScoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
 
-//        val evaluate = findViewById<TextView>(R.id.evaluate)
-//        val wish = findViewById<TextView>(R.id.wish)
-//        val emotion = findViewById<ImageView>(R.id.emotion)
-//        val score : Int = intent.getStringExtra("Score").toString().toInt()
+        val score = intent.getIntExtra("Score", 0)
+        val evaluate = findViewById<TextView>(R.id.evaluate)
+        val emotion = findViewById<ImageView>(R.id.emotion)
+        val wish = findViewById<TextView>(R.id.wish)
+
         correctNum = findViewById(R.id.correct_num)
         nextBtn = findViewById(R.id.nl_btn)
 
         //custom lời chúc, nhận xét, nhạc
-//        if(score <= 10) {
-//            evaluate.text = "Poor!"
-//            emotion.setImageResource(R.drawable.sad_img)
-//        }
+
+        when {
+            score <= 4 -> {
+                evaluate.text = "Poor!"
+                wish.text = "You need to try more "
+                emotion.setImageResource(R.drawable.sad_img)
+            }
+            score <= 7 -> {
+                evaluate.text = "Good!"
+                wish.text = "You finished your test well but you need to practice more "
+            }
+            else -> {
+                evaluate.text = "Excellent!"
+                wish.text = "You completed your quiz excellent "
+            }
+        }
+
 
         correctNum.text = intent.getStringExtra("CorrectNum")
 
@@ -37,4 +52,23 @@ class ScoreActivity : AppCompatActivity() {
             finish()
         }
     }
+
+//    @SuppressLint("SetTextI18n")
+//    private fun customWish(score : Int) {
+//        when {
+//            score <= 4 -> {
+//                evaluate.text = "Poor!"
+//                wish.text = "You need to try more "
+//                emotion.setImageResource(R.drawable.sad_img)
+//            }
+//            score <= 7 -> {
+//                evaluate.text = "Good!"
+//                wish.text = "You finished your test well but you need to practice more "
+//            }
+//            else -> {
+//                evaluate.text = "Excellent!"
+//                wish.text = "You completed your quiz excellent "
+//            }
+//        }
+//    }
 }

@@ -32,15 +32,6 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-//        val emailCheck = preferences.getString("Email", "")
-//
-//        if(emailCheck!== "") {
-//            val mainIntent = Intent(this, MainActivity::class.java)
-//            startActivity(mainIntent)
-//        }
-
-        //Menu Hooks
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.nav_view)
         navToggleBtn = findViewById(R.id.action_menu_presenter)
